@@ -14,7 +14,7 @@ function App() {
       <Box className="ChatBox" display="flex" justifyContent="space-around" alignItems="center">
         <TextField className="ChatInput" label="Message" fullWidth={true} />
         <Button variant="contained" color="primary">
-          Primary
+          Send
         </Button>
       </Box>
 
