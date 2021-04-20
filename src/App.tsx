@@ -3,7 +3,9 @@ import './App.css';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
 import JoinPaper from './components/JoinPaper';
+import Person from './components/Person';
 
 interface User {
   name: string,
@@ -17,6 +19,7 @@ const App = () => {
     joined: false,
     position: [0,0]
   });
+  const [users, setUsers] = useState<User[]>([user])
 
   const onJoin = () => {
     setUser({ ...user, joined: true });
@@ -29,7 +32,7 @@ const App = () => {
           (
             <>
               <Box className="PeopleBox">
-                test
+                <Person name="My Name" message="Hello Dear" />
               </Box>
 
               <Box className="ChatBox" display="flex" justifyContent="space-around" alignItems="center">
