@@ -1,0 +1,11 @@
+.JoinPaper {
+  display: flex;
+  flex-grow: 0.2;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2%;
+}
+
+.NameInput {
+  padding-bottom: 10px;
+}
