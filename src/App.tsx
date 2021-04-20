@@ -24,11 +24,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <Box display="flex" alignItems="center" justifyContent="center" minHeight="600px">
+      <Box display="flex" alignItems={user.joined ? 'stretch' : 'center'} justifyContent="center" minHeight="600px" flexDirection="column">
         { user.joined ? 
           (
             <>
-              <Box display="relative" className="PeopleBox">
+              <Box className="PeopleBox">
+                test
               </Box>
 
               <Box className="ChatBox" display="flex" justifyContent="space-around" alignItems="center">
