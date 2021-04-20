@@ -4,14 +4,10 @@ import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import { User } from './interfaces';
 import JoinPaper from './components/JoinPaper';
 import Person from './components/Person';
-
-interface User {
-  name: string,
-  message: string,
-  position: number[]
-}
+import Stadium from './components/Stadium';
 
 interface AppState {
   joined: boolean,
@@ -60,11 +56,7 @@ const App = () => {
         { appState.joined ? 
           (
             <>
-              <Box className="PeopleBox">
-                {users.map((user: User): JSX.Element => {
-                  return (<Person name={user.name} message={user.message} />)
-                })}
-              </Box>  
+              <Stadium users={users} />
 
               <Box className="ChatBox" display="flex" justifyContent="space-around" alignItems="center">
                 <TextField 

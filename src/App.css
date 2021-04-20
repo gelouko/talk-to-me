@@ -6,12 +6,6 @@ body {
   text-align: center;
 }
 
-.PeopleBox {
-  background-color: #61dafb;
-  position: relative;
-  min-height: 500px;
-}
-
 .ChatBox {
   background-color: gainsboro;
   display: flex;
