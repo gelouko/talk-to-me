@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import './App.css';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import JoinPaper from './components/JoinPaper';
 
+interface User {
+  name: string,
+  joined: boolean,
+  position: number[]
+}
 
 const App = () => {
-  const [state, setState] = useState({
-    userName: ''
-  })
+  const [user, setUser] = useState<User>({
+    name: '',
+    joined: false,
+    position: [0,0]
+  });
+
+  const onJoin = () => {
+    setUser({ ...user, joined: true });
+  }
 
   return (
     <div className="App">
       <Box display="flex" alignItems="center" justifyContent="center" minHeight="600px">
-        { state.userName ? 
+        { user.joined ? 
           (
             <>
               <Box display="relative" className="PeopleBox">
@@ -28,7 +39,11 @@ const App = () => {
               </Box>
             </>
           )
-          : <JoinPaper />
+          : <JoinPaper 
+              userName={user.name}
+              setUserName={(e: ChangeEvent<HTMLTextAreaElement>): void => setUser({ ...user, name: e.target.value })}
+              onJoin={onJoin} 
+            />
         }
       </Box>
     </div>
