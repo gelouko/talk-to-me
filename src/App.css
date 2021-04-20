@@ -2,9 +2,22 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.PeopleBox {
+  background-color: #61dafb;
+  position: relative;
+  min-height: 500px;
+}
+
+.ChatBox {
+  background-color: gainsboro;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.ChatBox.ChatInput {
+  flex-grow: 0.5;
 }
 
 @media (prefers-reduced-motion: no-preference) {
