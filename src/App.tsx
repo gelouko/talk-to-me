@@ -6,12 +6,13 @@ import Button from '@material-ui/core/Button';
 
 import { User } from './interfaces';
 import JoinPaper from './components/JoinPaper';
-import Person from './components/Person';
+import { createSocket } from './utils/sockets';
 import Stadium from './components/Stadium';
 
 interface AppState {
   joined: boolean,
-  currentMessage: string
+  currentMessage: string,
+  socket?: WebSocket
 }
 
 const App = () => {
@@ -27,8 +28,11 @@ const App = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   const onJoin = () => {
-    setUsers([ ...users, currentUser ]);
-    setAppState({ ...appState, joined: true });
+    setAppState({ 
+      ...appState, 
+      joined: true, 
+      socket: createSocket(currentUser, setUsers)
+    });
   }
 
   const sendMessage = (): void => {
