@@ -9,43 +9,84 @@ import Person from './components/Person';
 
 interface User {
   name: string,
-  joined: boolean,
+  message: string,
   position: number[]
 }
 
+interface AppState {
+  joined: boolean,
+  currentMessage: string
+}
+
 const App = () => {
-  const [user, setUser] = useState<User>({
-    name: '',
+  const [appState, setAppState] = useState<AppState>({
     joined: false,
-    position: [0,0]
+    currentMessage: ''
   });
-  const [users, setUsers] = useState<User[]>([user])
+  const [currentUser, setCurrentUser] = useState<User>({
+    name: '',
+    message: '',
+    position: [0,0]
+  })
+  const [users, setUsers] = useState<User[]>([]);
 
   const onJoin = () => {
-    setUser({ ...user, joined: true });
+    setUsers([ ...users, currentUser ]);
+    setAppState({ ...appState, joined: true });
+  }
+
+  const sendMessage = (): void => {
+    users.forEach((user: User, i: number, arr: User[]): void => {
+      if (user.name === currentUser.name) {
+        arr.splice(i, 1);
+        
+        setUsers([ ...arr, {
+          ...user,
+          message: appState.currentMessage
+        }]);
+        setAppState({
+          ...appState,
+          currentMessage: ''
+        });
+      }
+    });
+
+    console.log(users);
   }
 
   return (
     <div className="App">
-      <Box display="flex" alignItems={user.joined ? 'stretch' : 'center'} justifyContent="center" minHeight="600px" flexDirection="column">
-        { user.joined ? 
+      <Box display="flex" alignItems={appState.joined ? 'stretch' : 'center'} justifyContent="center" minHeight="600px" flexDirection="column">
+        { appState.joined ? 
           (
             <>
               <Box className="PeopleBox">
-                <Person name="My Name" message="Hello Dear" />
-              </Box>
+                {users.map((user: User): JSX.Element => {
+                  return (<Person name={user.name} message={user.message} />)
+                })}
+              </Box>  
 
               <Box className="ChatBox" display="flex" justifyContent="space-around" alignItems="center">
-                <TextField className="ChatInput" label="Message" fullWidth={true} />
-                <Button variant="contained" color="primary">
+                <TextField 
+                  className="ChatInput" 
+                  label="Message" 
+                  fullWidth={true} 
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>): void => setAppState({ ...appState, currentMessage: e.target.value })}
+                  value={appState.currentMessage} 
+                />
+                <Button 
+                  variant="contained" 
+                  color="primary"
+                  onClick={(e: any): void => sendMessage()}
+                >
                   Send
                 </Button>
               </Box>
             </>
           )
           : <JoinPaper 
-              userName={user.name}
-              setUserName={(e: ChangeEvent<HTMLTextAreaElement>): void => setUser({ ...user, name: e.target.value })}
+              userName={currentUser.name}
+              setUserName={(e: ChangeEvent<HTMLTextAreaElement>): void => setCurrentUser({ ...currentUser, name: e.target.value })}
               onJoin={onJoin} 
             />
         }
