@@ -3,11 +3,13 @@ import './Stadium.css';
 import { User } from '../../interfaces';
 import Person from '../Person';
 
+const SPEED = 20;
+
 const keyFunctions: { [key:string]: (position: number[]) => number[]} = {
-  ArrowUp: (currentPosition: number[]) => [currentPosition[0], currentPosition[1] - 5],
-  ArrowDown: (currentPosition: number[]) => [currentPosition[0], currentPosition[1] + 5],
-  ArrowLeft: (currentPosition: number[]) => [currentPosition[0] - 5, currentPosition[1]],
-  ArrowRight: (currentPosition: number[]) => [currentPosition[0] + 5, currentPosition[1]],
+  ArrowUp: (currentPosition: number[]) => [currentPosition[0], currentPosition[1] - SPEED],
+  ArrowDown: (currentPosition: number[]) => [currentPosition[0], currentPosition[1] + SPEED],
+  ArrowLeft: (currentPosition: number[]) => [currentPosition[0] - SPEED, currentPosition[1]],
+  ArrowRight: (currentPosition: number[]) => [currentPosition[0] + SPEED, currentPosition[1]],
 }
 
 const Stadium = (props: { users: User[], currentUser: User, setUserPosition: (position: number[]) => void }) => {

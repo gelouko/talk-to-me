@@ -1,7 +1,6 @@
 import { User } from "../interfaces";
 
-
-const WS_SERVER_URL = 'ws://localhost:9000';
+const WS_SERVER_URL = process.env.WS_SERVER_URL || 'ws://localhost:9000';
 
 const createSocket = (currentUser: User, setCurrentUser: (state: any) => void, setUsers: (state: any) => void):WebSocket => {
   const socket = new WebSocket(WS_SERVER_URL);
@@ -12,7 +11,6 @@ const createSocket = (currentUser: User, setCurrentUser: (state: any) => void, s
   });
 
   socket.addEventListener('message', (e: MessageEvent):void => {
-    console.log('Received message!', e);
     const users: User[] = JSON.parse(e.data);
 
     setCurrentUser(users.filter((user: User) => user.name === currentUser.name)[0]);
