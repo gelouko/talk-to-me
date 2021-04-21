@@ -54,4 +54,6 @@ Some aspects of the project were really challenging for me, as such:
 
 ## Live Demo
 
-TBD
+I'm leaving this online for a couple of hours, if it's not online when you check it and you want to test it out, feel free to send me a message! :)
+
+https://talktome.gelouko.ninja/
