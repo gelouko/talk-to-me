@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# Talk to Me!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a challenge project made for Tribe. It uses WebSockets, NodeJS, TypeScript and React.
 
-## Available Scripts
+I actually had a lot of fun doing it :)
 
-In the project directory, you can run:
+## How it works
 
-### `yarn start`
+Just input your name when prompted, and start talking with other users in real time! :)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Block Diagram
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Block Diagram](docs/talk-to-me.png)
 
-### `yarn test`
+Frontend Components:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **App**: The entry point of the React application, it handles the main page and holds the majority of the front end state
+- **JoinPaper**: A simple paper used as the page to "login" to the app. It's the first screen you see when logging in
+- **Stadium**: The "Blue Box" that initially contains all of the users
+- **Person**: The Person Icon and its related components, like name and bubble chat
 
-### `yarn build`
+Backend:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **WebSocket Server**: There is only one connection per client, and it is a WS connection.
+- **Chat Service**: The backend service that holds the overall application state.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Same commands as a create-react-app project
 
-### `yarn eject`
+```bash
+$ yarn
+$ yarn start // run
+$ yarn build // build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Improvements
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A lot of decisions were taken during the implementation of the project due to the deadline, so some improvements are:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Use a centralized way to send events to the WebSocket server
+- Add a barrier so users can't go out of the screen
+- Reset timeout if 2 messages are sent
+- Add tests
+- And others!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Challenges
 
-## Learn More
+Some aspects of the project were really challenging for me, as such:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- TypeScript: This is the first time I've coded using TypeScript. It adds some really cool features and I liked it, but having to learn everything today, it didn't make things easier. It was easy to use it considering my JS experience, but it took me some time to start understanding some troubleshoot stuff.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- WebSockets: This is roughly my second time coding with WebSockets in Node, but fortunatelly, this wasn't a big problem, I just had to remember a couple of stuff :)
+
+## Live Demo
+
+TBD
