@@ -35,28 +35,19 @@ const App = () => {
     });
   }
 
-  const sendMessage = (): void => {
-    users.forEach((user: User, i: number, arr: User[]): void => {
-      if (user.name === currentUser.name) {
-        arr.splice(i, 1);
-        
-        setUsers([ ...arr, {
-          ...user,
-          message: appState.currentMessage
-        }]);
-        setAppState({
-          ...appState,
-          currentMessage: ''
-        });
-      }
-    });
+  const sendMessage = (message: string): void => {
+    const event = { action: 'update', currentUser: { ...currentUser, message } };
+
+    appState.socket && appState.socket.send(JSON.stringify(event))
+    setCurrentUser({ ...event.currentUser })
+    setAppState({ ...appState, currentMessage: '' })
   }
 
   const setUserPosition = (position: number[]) => {
-    const message = { action: 'update', currentUser: { ...currentUser, position } };
+    const event = { action: 'update', currentUser: { ...currentUser, position } };
 
-    appState.socket && appState.socket.send(JSON.stringify(message))
-    setCurrentUser({ ...message.currentUser })
+    appState.socket && appState.socket.send(JSON.stringify(event))
+    setCurrentUser({ ...event.currentUser })
   }
 
   return (
@@ -78,7 +69,7 @@ const App = () => {
                 <Button 
                   variant="contained" 
                   color="primary"
-                  onClick={(e: any): void => sendMessage()}
+                  onClick={(e: any): void => sendMessage(appState.currentMessage)}
                 >
                   Send
                 </Button>

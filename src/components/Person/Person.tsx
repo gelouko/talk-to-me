@@ -11,27 +11,32 @@ const Person = (props: { name: string, message: string, position: number[] }) =>
     setShowMessage(true);
     setTimeout(() => {
       setShowMessage(false);
-    }, 3000)
+    }, SHOW_MESSAGE_TIME)
   }, [props.message]);
-
-  console.log('pos', props.position);
 
   return (
     <Box 
       display="flex"
-      flexDirection="column"
+      flexDirection="row"
       alignItems="center"
       justifyContent="center"
       className="PersonBox"
       left={`${props.position[0]}px`}
       top={`${props.position[1]}px`}
     >
+      <Box 
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <PersonPin fontSize="large" />
+        <div>{props.name}</div>
+      </Box>
       { showMessage && props.message.length
           ? <div className="ChatBubble">{props.message}</div>
           : ''
       }
-      <PersonPin fontSize="large" />
-      <div>{props.name}</div>
     </Box>
   )
 }
