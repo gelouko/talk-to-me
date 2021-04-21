@@ -4,3 +4,7 @@
   padding: 1rem;
   border-radius: 100%;
 }
+
+.PersonBox {
+  position: absolute;
+}

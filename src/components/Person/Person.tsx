@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 
 const SHOW_MESSAGE_TIME = 3000; // milliseconds
 
-const Person = (props: { name: string, message: string }) => {
+const Person = (props: { name: string, message: string, position: number[] }) => {
   const [showMessage, setShowMessage] = useState<boolean>(true);
   useEffect(():void => {
     setShowMessage(true);
@@ -14,8 +14,18 @@ const Person = (props: { name: string, message: string }) => {
     }, 3000)
   }, [props.message]);
 
+  console.log('pos', props.position);
+
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+    <Box 
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      className="PersonBox"
+      left={`${props.position[0]}px`}
+      top={`${props.position[1]}px`}
+    >
       { showMessage && props.message.length
           ? <div className="ChatBubble">{props.message}</div>
           : ''

@@ -50,8 +50,13 @@ const App = () => {
         });
       }
     });
+  }
 
-    console.log(users);
+  const setUserPosition = (position: number[]) => {
+    const message = { action: 'update', currentUser: { ...currentUser, position } };
+
+    appState.socket && appState.socket.send(JSON.stringify(message))
+    setCurrentUser({ ...message.currentUser })
   }
 
   return (
@@ -60,7 +65,7 @@ const App = () => {
         { appState.joined ? 
           (
             <>
-              <Stadium users={users} />
+              <Stadium users={users} currentUser={currentUser} setUserPosition={setUserPosition} />
 
               <Box className="ChatBox" display="flex" justifyContent="space-around" alignItems="center">
                 <TextField 
