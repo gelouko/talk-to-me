@@ -2,7 +2,6 @@ import React, { KeyboardEvent } from 'react';
 import './Stadium.css';
 import { User } from '../../interfaces';
 import Person from '../Person';
-import { getPositionOfLineAndCharacter } from 'typescript';
 
 const keyFunctions: { [key:string]: (position: number[]) => number[]} = {
   ArrowUp: (currentPosition: number[]) => [currentPosition[0], currentPosition[1] - 5],
@@ -22,7 +21,7 @@ const Stadium = (props: { users: User[], currentUser: User, setUserPosition: (po
   
   return <div tabIndex={0} className="PeopleBox" onKeyDown={moveUser}>
     {props.users.map((user: User, i: number): JSX.Element => {
-      return (<Person key={i} name={user.name} message={user.message} position={user.position} />)
+      return (<Person key={i} user={user} currentUser={props.currentUser} />)
     })}
   </div>
 }

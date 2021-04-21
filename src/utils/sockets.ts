@@ -3,7 +3,7 @@ import { User } from "../interfaces";
 
 const WS_SERVER_URL = 'ws://localhost:9000';
 
-const createSocket = (currentUser: User, setUsers: (state: any) => void):WebSocket => {
+const createSocket = (currentUser: User, setCurrentUser: (state: any) => void, setUsers: (state: any) => void):WebSocket => {
   const socket = new WebSocket(WS_SERVER_URL);
 
   socket.addEventListener('open', (e: Event):void => {
@@ -15,8 +15,7 @@ const createSocket = (currentUser: User, setUsers: (state: any) => void):WebSock
     console.log('Received message!', e);
     const users: User[] = JSON.parse(e.data);
 
-    console.log('Setting users...', users);
-
+    setCurrentUser(users.filter((user: User) => user.name === currentUser.name)[0]);
     setUsers(users)
   });
 

@@ -31,7 +31,7 @@ const App = () => {
     setAppState({ 
       ...appState, 
       joined: true, 
-      socket: createSocket(currentUser, setUsers)
+      socket: createSocket(currentUser, setCurrentUser, setUsers)
     });
   }
 
@@ -39,6 +39,7 @@ const App = () => {
     const event = { action: 'update', currentUser: { ...currentUser, message } };
 
     appState.socket && appState.socket.send(JSON.stringify(event))
+
     setCurrentUser({ ...event.currentUser })
     setAppState({ ...appState, currentMessage: '' })
   }
